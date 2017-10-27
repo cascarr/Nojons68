@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')->get();
+        $products = Product::paginate(3);
         return view('home', compact('products'));
     }
 }

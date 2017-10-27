@@ -12,9 +12,14 @@
 */
 
 //Route::get('/','HomeController@index')->name('home');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/', 'HomeController@index')->name('root');
+
+Auth::routes();
+
+
 
 
 // to the admin
@@ -44,11 +49,3 @@ Route::get('/admin/{id}', 'ProductController@destroy');
 
 
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('protected', ['middleware' => ['admin'], function() {
-    // this page requires that you be an admin and be logged in.
-    return view('show');
-}]);

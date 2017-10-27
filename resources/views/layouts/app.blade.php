@@ -12,6 +12,32 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+          .panel-heading  > p{display: inline-block;}
+             .pagination {
+                padding-left: 0 !important;
+                border-radius: 4px;
+                float: right;
+                 margin: 0px;
+            }
+        
+        .btn {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+           
+            cursor: pointer;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            padding: 2px 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            border-radius: 4px;
+            user-select: none;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -29,7 +55,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Nojons68') }}
+                        {{ config('app.name', 'Nojons68.com') }}
                     </a>
                 </div>
 
@@ -61,11 +87,31 @@
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
+                                                                                                        
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+
                                     </li>
+                                    
+                                    @if(Auth::user()->isAdmin == 1)
+                                    
+                                    <li>
+                                        <a href="{{ route('show') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('show').submit();">
+                                            Admin
+                                        </a>
+                                                                                                        
+
+                                        <form id="show" action="/admin/show" method="GET" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+
+                                    </li>
+
+                                    @endif
                                 </ul>
                             </li>
                         @endif

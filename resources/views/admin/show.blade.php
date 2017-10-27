@@ -19,6 +19,7 @@
             <div class="panel-heading" style="padding-bottom: 20px;">
                 Show Products
                 <a  style="float: right;" href="/admin/create" class="btn btn-success">Add Product</a>
+
             </div>
 
                 <div class="panel-body">
@@ -27,7 +28,7 @@
                 <div class="table-responsive"> 
 
   <table class="table">
-      
+      {{ $products->links() }}
     <thead>
       <tr>
         <th>ID</th>
@@ -44,12 +45,13 @@
       <tr class="success">
           
           @foreach($products as $product)
-          
+<!--        <td>{{ $loop -> index+1 }}</td>  -->
         <td>{{ $product->id }}</td>
         <td>{{ $product->product_name }}</td>
         <td>{{ $product->product_desc }}</td>
         <td>&#36;{{ $product->product_price }}</td>
-        <td><img src="{{ asset('images/'.$product->Product_image)}}"  alt="Image"></td>
+        
+        <td><img class="img-responsive" src="{{ asset('images/'.$product->Product_image)}}" style="max-width: 200px; max-height: 100px;" alt="Image"></td>
         <td>{{ Carbon\Carbon::parse($product->created_at)->format('d/m/Y') }}</td>
         <td>{{ Carbon\Carbon::parse($product->updated_at)->format('d/m/Y') }}</td>
          
@@ -59,6 +61,7 @@
           
       </tr>  <br/>    
         @endforeach
+        
     </tbody>
       
   </table>

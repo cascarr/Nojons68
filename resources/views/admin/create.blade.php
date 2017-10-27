@@ -57,7 +57,7 @@
 
   <div class="form-group">
     <label for="product_price">Price</label>
-    <input type="number" class="form-control" min="0.00" max="10000.00" step="0.01" value="" name="product_price" id="product_price">
+    <input type="number" class="form-control"  value="" name="product_price" id="product_price">
     <span class="help-block">
         <strong>{{ $errors->first('product_price') }}</strong>
     </span>
@@ -68,7 +68,7 @@
 
   <div class="form-group">
     <label for="product_image">Product image</label>
-    <input type="file" id="Product_image" name="Product_image">
+    <input type="file" id="Product_image" name="Product_image"  style="width:100%">
     <p class="help-block">Please insert product image here.</p>
     <span class="help-block">
         <strong>{{ $errors->first('Product_image') }}</strong>

@@ -13,6 +13,7 @@ use Image;
 
 use Validator;
 use App\Http\Requests\StoreProducts;
+use App\Http\Requests\EditProducts;
 
 use DB;
 
@@ -34,7 +35,7 @@ class ProductController extends Controller
             $image = $request->file('Product_image');
             $filename = $image->getClientOriginalName();
             $location = public_path('images/'.$filename);  
-            Image::make($image)->resize(150, 80)->save($location);
+            Image::make($image)->save($location);
             
         }
         
@@ -52,7 +53,8 @@ class ProductController extends Controller
     // this function displays product details to the admin
     public function show()
     {
-        $products = DB::table('products')->get();
+        //$products = DB::table('products')->get();
+        $products = Product::paginate(2);
         return view ('admin.show', compact('products'));
 
     }
@@ -71,7 +73,7 @@ class ProductController extends Controller
     
     
     // processes the edit form
-    public function updateProduct($id, StoreProducts $request)
+    public function updateProduct($id, EditProducts $request)
     {
 
         $product = Product::find($id);
@@ -82,15 +84,17 @@ class ProductController extends Controller
         $image = $request->file('Product_image');
         $filename = $image->getClientOriginalName();
         $location = public_path('images/'.$filename);  
-        Image::make($image)->resize(150, 80)->save($location);
+        Image::make($image)->save($location);
+        $product->Product_image = $filename;
             
         }
 
         $product->product_name = $request->product_name;
         $product->product_desc = $request->product_desc;
         $product->product_price = $request->product_price;
-        $product->Product_image = $filename;
+       
         $product->save();
+        
         
         
         return redirect('/admin/show');
@@ -108,7 +112,7 @@ class ProductController extends Controller
         return redirect('/admin/show');
     }
 
-
-
+    
+    
 
 }
